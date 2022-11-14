@@ -16,6 +16,17 @@
           {% else %}
             <text style="color: red">Undone</text>
           {% endif %}
+          {% if task.done %}
+            <a href="{% url 'task_manager:done_undone' pk=task.id %}"
+               class="btn btn-danger link-to-page">
+              Complete
+            </a>
+          {% else %}
+            <a href="{% url 'task_manager:done_undone' pk=task.id %}"
+               class="btn btn-success link-to-page">
+              Undo
+            </a>
+          {% endif %}
         </li>
         <li>
           Created at: {{ task.created }}
