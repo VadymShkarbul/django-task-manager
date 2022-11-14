@@ -8,6 +8,7 @@ from task_manager.models import Task, Tag
 
 class TaskListView(generic.ListView):
     model = Task
+    queryset = Task.objects.all().prefetch_related("tags")
 
 
 class TaskCreateView(generic.CreateView):
