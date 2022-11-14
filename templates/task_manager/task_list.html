@@ -5,4 +5,15 @@
     TODO list
     <a href="#" class="btn btn-primary link-to-page">Add New Task</a>
   </h1>
+  {% if task_list %}
+    <ul>
+      {% for task in task_list %}
+        <li>
+          {{ task.text }}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No task</p>
+  {% endif %}
 {% endblock %}
