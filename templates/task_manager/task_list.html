@@ -3,13 +3,34 @@
 {% block content %}
   <h1>
     TODO list
-    <a href="#" class="btn btn-primary link-to-page">Add New Task</a>
+    <a href="{% url 'task_manager:task-create' %}"
+       class="btn btn-primary link-to-page">Add New Task</a>
   </h1>
   {% if task_list %}
     <ul>
       {% for task in task_list %}
         <li>
           {{ task.text }}
+          {% if task.done %}
+            <text style="color: green">Done</text>
+          {% else %}
+            <text style="color: red">Undone</text>
+          {% endif %}
+        </li>
+        <li>
+          Created at: {{ task.created }}
+          {% if task.deadline %}
+            Deadline to: {{ task.deadline }}
+          {% endif %}
+        </li>
+        <li>
+          Tags:
+          {% for tag in task.tags.all %}
+            {{ tag.name }}
+          {% endfor %}
+          <a href="{% url 'task_manager:task-update'  pk=task.id %}">Update</a>
+          <a href="{% url 'task_manager:task-delete' pk=task.id %}"
+             style="color: red">Delete</a>
         </li>
       {% endfor %}
     </ul>
